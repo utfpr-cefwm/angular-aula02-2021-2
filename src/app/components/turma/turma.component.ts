@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Turma } from 'src/app/models/turma';
+import { TurmaDetalhes } from 'src/app/models/turma';
 
 @Component({
   selector: 'app-turma',
@@ -9,7 +9,7 @@ import { Turma } from 'src/app/models/turma';
 export class TurmaComponent implements OnInit {
 
   @Input()
-  public turma!: Turma;
+  public turma!: TurmaDetalhes;
 
   constructor(
   ) {

@@ -1,7 +1,7 @@
-import { Turma } from './turma';
+import { TurmaDetalhes } from './turma';
 
 describe('Turma', () => {
   it('should create an instance', () => {
-    expect(new Turma()).toBeTruthy();
+    expect(new TurmaDetalhes()).toBeTruthy();
   });
 });

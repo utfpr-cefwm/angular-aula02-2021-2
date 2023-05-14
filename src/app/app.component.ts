@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Turma } from './models/turma';
+
+import { Turma, TurmaDetalhes } from './models/turma';
+import { TurmaService } from './services/turma.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +10,17 @@ import { Turma } from './models/turma';
 })
 export class AppComponent {
 
-  public turma?: Turma;
+  constructor(
+    public turmaService: TurmaService,
+  ) {
+  }
+
+  public turma?: TurmaDetalhes;
 
   public exibeTurma(t: Turma): void {
-    this.turma = t;
+    this.turmaService.getDetalhes(t._id).subscribe(tDet => {
+      this.turma = tDet;
+    });
   }
 
 }

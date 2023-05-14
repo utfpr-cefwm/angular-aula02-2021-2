@@ -1,7 +1,10 @@
-export interface ITurma {
+export interface ITurmaBase {
   _id: string;
   ano: number;
   periodo: number;
+}
+
+export interface ITurmaDetalhes extends ITurmaBase {
   disciplina: {
     _id: string;
     codigo: string;
@@ -12,4 +15,9 @@ export interface ITurma {
     codigo: number;
     nome: string;
   }[];
+}
+
+export interface ITurma extends ITurmaBase {
+  disciplina_codigo: string;
+  alunos_total: number;
 }

@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Turma } from '../models/turma';
-import { ITurma } from '../interfaces/turma';
+import { Turma, TurmaDetalhes } from '../models/turma';
+import { ITurma, ITurmaDetalhes } from '../interfaces/turma';
 import { Disciplina } from '../models/disciplina';
 import { Aluno } from '../models/aluno';
 
@@ -24,17 +24,32 @@ export class TurmaService {
       'http://localhost:3000/api/turmas/',
     ).pipe(
       map((x) => x.map(iTurma => new Turma(
-        new Disciplina(
-          iTurma.disciplina.codigo,
-          iTurma.disciplina.nome,
-        ),
+        iTurma._id,
+        iTurma.disciplina_codigo,
         iTurma.ano,
         iTurma.periodo,
-        iTurma.alunos.map(iAluno => new Aluno(
-          iAluno.codigo,
-          iAluno.nome,
-        )),
+        iTurma.alunos_total,
       ))),
+    );
+  }
+
+  public getDetalhes(id: string): Observable<TurmaDetalhes> {
+    return this.httpClient.get<ITurmaDetalhes>(
+      'http://localhost:3000/api/turmas/' + id,
+    ).pipe(
+      map((x) => new TurmaDetalhes(
+        x._id,
+        new Disciplina(
+          x.disciplina.codigo,
+          x.disciplina.nome,
+        ),
+        x.ano,
+        x.periodo,
+        x.alunos.map(a => new Aluno(
+          a.codigo,
+          a.nome,
+        )),
+      )),
     );
   }
 

@@ -1,7 +1,21 @@
 <nav>
-  <app-lista-turmas></app-lista-turmas>
+  <app-lista-turmas
+    (turmaSelecionada)="exibeTurma($event)"
+  >
+  </app-lista-turmas>
 </nav>
-<main>
+<main
+  *ngIf="turma; else semTurma"
+>
+  <app-turma
+    [turma]="turma"
+  >
+  </app-turma>
 </main>
+<ng-template #semTurma>
+  <main>
+    Selecione uma turma para exibir.
+  </main>
+</ng-template>
 
 <router-outlet></router-outlet>
